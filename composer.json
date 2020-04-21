@@ -3,6 +3,7 @@
   "type": "oxideshop-module",
   "description": "Match shirtnetwork sku for different schemes",
   "license": "MIT",
+  "version": "1.0.1",
   "authors": [
     {
       "name": "Alexander Kludt",
