@@ -7,6 +7,10 @@ class snwskumatcher_oxarticle extends snwskumatcher_oxarticle_parent {
 
     public function getDesignerVariantSku(){
 
+        if ($this->getDesignerVariantSmartyMatcher()){
+            return $this->getDesignerSmartyMatch($this->getDesignerVariantSmartyMatcher());
+        }
+
         if ($this->_sDesignerVariantSku === null && $this->oxarticles__oxparentid->value) {
             //remove base sku
             $aParts = explode('-', $this->oxarticles__oxartnum->value);
@@ -33,6 +37,11 @@ class snwskumatcher_oxarticle extends snwskumatcher_oxarticle_parent {
     }
 
     public function getDesignerSizeSku(){
+
+        if ($this->getDesignerSizeSmartyMatcher()){
+            return $this->getDesignerSmartyMatch($this->getDesignerSizeSmartyMatcher());
+        }
+
         if ($this->_sDesignerSizeSku === null && $this->oxarticles__oxparentid->value) {
             $oParent = $this->getParentArticle();
             if(stristr($oParent->oxarticles__oxvarname->value, '|') !== FALSE){
@@ -47,6 +56,18 @@ class snwskumatcher_oxarticle extends snwskumatcher_oxarticle_parent {
             }
         }
         return $this->_sDesignerSizeSku;
+    }
+
+    protected function getDesignerVariantSmartyMatcher () {
+        return trim(implode(PHP_EOL, \OxidEsales\Eshop\Core\Registry::getConfig()->getConfigParam('aSmartyVariantSkuMatcher', null, 'module:snwskumatcher')));
+    }
+
+    protected function getDesignerSizeSmartyMatcher () {
+        return trim(implode(PHP_EOL, \OxidEsales\Eshop\Core\Registry::getConfig()->getConfigParam('aSmartyVariantSkuMatcher', null, 'module:snwskumatcher')));
+    }
+
+    protected function getDesignerSmartyMatch ($matcher) {
+        return trim(\OxidEsales\Eshop\Core\Registry::getUtilsView()->getRenderedContent($matcher, ['product' => $this], 'snwsku:'.$this->getId()));
     }
 
 
