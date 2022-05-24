@@ -8,6 +8,7 @@ $iLangNr = 0;
 $aLang = array(
     'charset' => 'UTF-8',
     'SHOP_MODULE_GROUP_snwskumatcher_settings' => 'Einstellungen',
+    'SHOP_MODULE_aSmartyProductSkuMatcher' => 'Produkt Matcher',
     'SHOP_MODULE_aSmartyVariantSkuMatcher' => 'Varianten Matcher',
     'SHOP_MODULE_aSmartySizeSkuMatcher' => 'Größen Matcher',
     'SHOP_MODULE_aSmartyPrinttypeSkuMatcher' => 'Druckart Matcher'
