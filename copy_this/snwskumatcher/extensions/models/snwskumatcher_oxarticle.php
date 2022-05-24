@@ -5,6 +5,13 @@ class snwskumatcher_oxarticle extends snwskumatcher_oxarticle_parent {
     protected $_sDesignerVariantSku;
     protected $_sDesignerSizeSku;
 
+    public function getDesignerBaseSku(){
+        if ($this->getDesignerProductSmartyMatcher()){
+            return $this->getDesignerSmartyMatch($this->getDesignerProductSmartyMatcher());
+        }
+        return parent::getDesignerBaseSku();
+    }
+
     public function getDesignerVariantSku(){
 
         if ($this->getDesignerVariantSmartyMatcher()){
@@ -62,6 +69,10 @@ class snwskumatcher_oxarticle extends snwskumatcher_oxarticle_parent {
         if ($this->getDesignerPrinttypeSmartyMatcher()){
             return $this->getDesignerSmartyMatch($this->getDesignerPrinttypeSmartyMatcher());
         }
+    }
+
+    protected function getDesignerProductSmartyMatcher () {
+        return trim(implode(PHP_EOL, \OxidEsales\Eshop\Core\Registry::getConfig()->getConfigParam('aSmartyProductSkuMatcher', null, 'module:snwskumatcher')));
     }
 
     protected function getDesignerVariantSmartyMatcher () {
